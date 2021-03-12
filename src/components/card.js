@@ -45,7 +45,6 @@ const Card = (article) => {
     return card;
 }
 
-const cardAppender = (selector) => {
   // TASK 6
   // ---------------------
   // Implement this function that takes a css selector as its only argument.
@@ -54,6 +53,36 @@ const cardAppender = (selector) => {
   // Create a card from each and every article object in the response, using the Card component.
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
+
+const cardAppender = (selector) => {
+    // Instantiating element attached to input selector value
+    const selectorElement = document.querySelector(`${selector}`);
+    // Obtaining topics from the given endpoint
+    axios
+    .get(`https://lambda-times-api.herokuapp.com/articles`)
+    // If promise is resolved, use Card to create cards
+    .then( (res) => {
+        // Creating array of topics because each topic has array of article objects
+        const articleTopics = Object.keys(res.data.articles);
+        console.log(articleTopics);
+        // Creating forEach loop that iterates through each topic
+        articleTopics.forEach( (topic) => {
+            const topicArticles = res.data.articles[topic];
+            // Creating forEach loop that iterates through each article for the current topic and uses Card to create a card for that article
+            topicArticles.forEach( (artObj) => {
+                const newCard = Card(artObj);
+                selectorElement.appendChild(newCard);
+            });
+        });
+    })
+    // If promise is not resolved, log error message to console
+    .catch( (err) => {
+        console.log(err);
+    })
+    // Log "done" to the console when promise is settled
+    .finally( () => {
+        console.log("done");
+    })
 }
 
 export { Card, cardAppender }
