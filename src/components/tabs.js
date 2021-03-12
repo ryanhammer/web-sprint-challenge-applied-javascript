@@ -1,4 +1,3 @@
-const Tabs = (topics) => {
   // TASK 3
   // ---------------------
   // Implement this function which takes an array of strings ("topics") as its only argument.
@@ -13,6 +12,20 @@ const Tabs = (topics) => {
   //   <div class="tab">technology</div>
   // </div>
   //
+
+const Tabs = (topics) => {
+    // Instantiate parent div element and add proper class attribute
+    const topicsDiv = document.createElement("div");
+    topicsDiv.classList.add("topics");
+    // Instantiate div element for each topic, assign text and proper class attribute and create element hierarchy within parent div element
+    topics.forEach(element => {
+        const newTopicDiv = document.createElement("div");
+        newTopicDiv.textContent = element;
+        newTopicDiv.classList.add("tab");
+        topicsDiv.appendChild(newTopicDiv);
+    });
+    // Return markup finished markup element
+    return topicsDiv;
 }
 
 const tabsAppender = (selector) => {
