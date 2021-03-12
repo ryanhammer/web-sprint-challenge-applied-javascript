@@ -46,7 +46,7 @@ const headerAppender = (selector) => {
     // instantiate element attached to input selector value
     const selectorElement = document.querySelector(`${selector}`);
     // create header passing in random argument names
-    const newHeader = Header("fake title", "fake date", "fake temp");
+    const newHeader = Header("Lambda Times", "March 12, 2021", "75°");
     // append header to element matching selector
     selectorElement.appendChild(newHeader);
 }
