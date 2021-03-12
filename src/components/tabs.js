@@ -28,7 +28,6 @@ const Tabs = (topics) => {
     return topicsDiv;
 }
 
-const tabsAppender = (selector) => {
   // TASK 4
   // ---------------------
   // Implement this function which takes a css selector as its only argument.
@@ -36,6 +35,26 @@ const tabsAppender = (selector) => {
   // Find the array of topics inside the response, and create the tabs using the Tabs component.
   // Append the tabs to the element in the DOM that matches the selector passed to the function.
   //
+const tabsAppender = (selector) => {
+    // Instantiating element attached to input selector value
+    const selectorElement = document.querySelector(`${selector}`);
+    // Obtaining topics from the given endpoint
+    axios
+    .get(`https://lambda-times-api.herokuapp.com/topics`)
+    // If promise is resolved, use Tabs to create tabs
+    .then( (res) => {
+        const topics = res.data.topics;
+        const newTabs = Tabs(topics);
+        selectorElement.appendChild(newTabs);
+    })
+    // If promise is not resolved, log error message to console
+    .catch( (err) => {
+        console.log(err);
+    })
+    // Log "done" to the console when promise is settled
+    .finally( () => {
+        console.log("done");
+    })
 }
 
 export { Tabs, tabsAppender }
