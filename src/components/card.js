@@ -1,4 +1,3 @@
-const Card = (article) => {
   // TASK 5
   // ---------------------
   // Implement this function, which should return the markup you see below.
@@ -17,6 +16,33 @@ const Card = (article) => {
   //   </div>
   // </div>
   //
+const Card = (article) => {
+    // Instantiating the needed elements
+    const card = document.createElement("div");
+    const articleHeadline = document.createElement("div");
+    const author = document.createElement("div");
+    const imgContainer = document.createElement("div");
+    const img = document.createElement("img");
+    const authorSpan = document.createElement("span");
+
+    // Assigning values and class attributes
+    card.classList.add("card");
+    articleHeadline.textContent = article.headline;
+    articleHeadline.classList.add("headline");
+    author.classList.add("author");
+    imgContainer.classList.add("img-container");
+    img.src = article.authorPhoto;
+    authorSpan.textContent = `By ${article.authorName}`;
+
+    // Adding the element hierarchy
+    card.appendChild(articleHeadline);
+    card.appendChild(author);
+    author.appendChild(imgContainer);
+    author.appendChild(authorSpan);
+    imgContainer.appendChild(img);
+
+    // Return the completed markup
+    return card;
 }
 
 const cardAppender = (selector) => {
