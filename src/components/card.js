@@ -64,7 +64,6 @@ const cardAppender = (selector) => {
     .then( (res) => {
         // Creating array of topics because each topic has array of article objects
         const articleTopics = Object.keys(res.data.articles);
-        console.log(articleTopics);
         // Creating forEach loop that iterates through each topic
         articleTopics.forEach( (topic) => {
             const topicArticles = res.data.articles[topic];
